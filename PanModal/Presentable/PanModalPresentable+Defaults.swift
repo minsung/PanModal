@@ -96,6 +96,10 @@ public extension PanModalPresentable where Self: UIViewController {
     var showDragIndicator: Bool {
         return shouldRoundTopCorners
     }
+    
+    var isPanGestureEnabled: Bool {
+        return true
+    }
 
     func shouldRespond(to panModalGestureRecognizer: UIPanGestureRecognizer) -> Bool {
         return true

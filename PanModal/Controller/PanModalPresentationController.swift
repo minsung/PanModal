@@ -345,7 +345,10 @@ private extension PanModalPresentationController {
          in the presentation animator instead of here
          */
         containerView.addSubview(presentedView)
-        containerView.addGestureRecognizer(panGestureRecognizer)
+        
+        if presentable.isPanGestureEnabled {
+            containerView.addGestureRecognizer(panGestureRecognizer)
+        }
 
         if presentable.showDragIndicator {
             addDragIndicatorView(to: presentedView)

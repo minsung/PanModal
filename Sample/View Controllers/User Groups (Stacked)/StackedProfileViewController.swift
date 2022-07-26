@@ -110,4 +110,8 @@ class StackedProfileViewController: UIViewController, PanModalPresentable {
         return true
     }
 
+    var isPanGestureEnabled: Bool {
+        return false
+    }
+    
 }
