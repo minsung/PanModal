@@ -134,7 +134,16 @@ public protocol PanModalPresentable: AnyObject {
      Default value is true.
      */
     var allowsDragToDismiss: Bool { get }
-
+    
+    /**
+     A flag to determine if the UIViewController should always be presented as Pan Modal.
+     
+     - Note: Return true to always be a Pan Modal
+     
+     Default is false. Which means that on iPad, it will be presented as a popover & as Pan Modal on iPhone.
+     */
+    var forcePanModal: Bool { get }
+    
     /**
      A flag to determine if dismissal should be initiated when tapping on the dimmed background view.
 
@@ -172,6 +181,27 @@ public protocol PanModalPresentable: AnyObject {
      Default value is true.
      */
     var showDragIndicator: Bool { get }
+    
+    /**
+     Configurable value for setting the Y offset for the visible drag indicator. Ignored if drag indicator is hidden.
+     
+     Default value is 8.0
+     */
+    var dragIndicatorYOffset: CGFloat { get }
+
+    /**
+     Configurable value for setting snap movement sensitivity.
+     
+     Default value is 0.7
+     */
+    var snapMovementSensitivity: CGFloat { get }
+
+    /**
+     Configurable value for the drag indicator size.
+     
+     Default value is 36.0 x 5.0
+     */
+    var dragIndicatorSize: CGSize { get }
     
     var isPanGestureEnabled: Bool { get }
 

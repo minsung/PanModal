@@ -73,6 +73,10 @@ public extension PanModalPresentable where Self: UIViewController {
         return scrollView.contentSize.height > (scrollView.frame.height - bottomLayoutOffset)
     }
 
+    var forcePanModal: Bool {
+        return false
+    }
+    
     var allowsDragToDismiss: Bool {
         return true
     }
@@ -95,6 +99,18 @@ public extension PanModalPresentable where Self: UIViewController {
 
     var showDragIndicator: Bool {
         return shouldRoundTopCorners
+    }
+    
+    var dragIndicatorYOffset: CGFloat {
+        return 8.0
+    }
+
+    var snapMovementSensitivity: CGFloat {
+        return 0.7
+    }
+
+    var dragIndicatorSize: CGSize {
+        return CGSize(width: 36.0, height: 5.0)
     }
     
     var isPanGestureEnabled: Bool {
