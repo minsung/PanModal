@@ -204,6 +204,8 @@ public protocol PanModalPresentable: AnyObject {
     var dragIndicatorSize: CGSize { get }
     
     var isPanGestureEnabled: Bool { get }
+    
+    var showShadow: Bool { get }
 
     /**
      Asks the delegate if the pan modal should respond to the pan modal gesture recognizer.

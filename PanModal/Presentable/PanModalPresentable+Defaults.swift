@@ -116,6 +116,10 @@ public extension PanModalPresentable where Self: UIViewController {
     var isPanGestureEnabled: Bool {
         return true
     }
+    
+    var showShadow: Bool {
+        return false
+    }
 
     func shouldRespond(to panModalGestureRecognizer: UIPanGestureRecognizer) -> Bool {
         return true

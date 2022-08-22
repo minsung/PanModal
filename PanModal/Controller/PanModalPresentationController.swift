@@ -117,7 +117,7 @@ open class PanModalPresentationController: UIPresentationController {
      */
     private lazy var panContainerView: PanContainerView = {
         let frame = containerView?.frame ?? .zero
-        return PanContainerView(presentedView: presentedViewController.view, frame: frame)
+        return PanContainerView(presentedView: presentedViewController.view, frame: frame, cornerRadius: presentable?.cornerRadius, showShadow: presentable?.showShadow)
     }()
 
     /**
@@ -452,8 +452,8 @@ private extension PanModalPresentationController {
          Set the appropriate contentInset as the configuration within this class
          offsets it
          */
-        scrollView.contentInset.bottom = presentingViewController.bottomLayoutGuide.length
-
+        scrollView.contentInset.bottom = presentingViewController.view.safeAreaInsets.bottom
+        
         /**
          As we adjust the bounds during `handleScrollViewTopBounce`
          we should assume that contentInsetAdjustmentBehavior will not be correct
@@ -840,10 +840,7 @@ private extension PanModalPresentationController {
      because we render the dragIndicator outside of view bounds
      */
     func addRoundedCorners(to view: UIView) {
-        let radius = presentable?.cornerRadius ?? 0
-        let path = UIBezierPath(roundedRect: view.bounds,
-                                byRoundingCorners: [.topLeft, .topRight],
-                                cornerRadii: CGSize(width: radius, height: radius))
+        let path = UIBezierPath(roundedRect: view.bounds, cornerRadius: 0)
 
         // Draw around the drag indicator view, if its displayed and is above the view.
         if presentable?.showDragIndicator == true && (presentable?.dragIndicatorYOffset ?? 0.0 > 0) {
@@ -854,7 +851,6 @@ private extension PanModalPresentationController {
         // Set path as a mask to display optional drag indicator view & rounded corners
         let mask = CAShapeLayer()
         mask.path = path.cgPath
-        view.layer.mask = mask
 
         // Improve performance by rasterizing the layer
         view.layer.shouldRasterize = true

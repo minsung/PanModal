@@ -16,8 +16,25 @@ import UIKit
  */
 class PanContainerView: UIView {
 
-    init(presentedView: UIView, frame: CGRect) {
+    init(presentedView: UIView, frame: CGRect, cornerRadius: CGFloat?, showShadow: Bool? = true) {
         super.init(frame: frame)
+        
+        if let cornerRadius = cornerRadius {
+            presentedView.layer.cornerRadius = cornerRadius
+            presentedView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        }
+        
+        if let showShadow = showShadow,
+           showShadow
+        {
+            let shadowPath = UIBezierPath(roundedRect: presentedView.bounds, cornerRadius: 0)
+            presentedView.layer.shadowPath = shadowPath.cgPath
+            presentedView.layer.shadowColor = UIColor.black.withAlphaComponent(0.2).cgColor
+            presentedView.layer.shadowOffset = CGSize(width: 0, height: 2)
+            presentedView.layer.shadowRadius = 15
+            presentedView.layer.shadowOpacity = 1
+        }
+        
         addSubview(presentedView)
     }
 
